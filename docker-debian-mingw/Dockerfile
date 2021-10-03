@@ -1,6 +1,6 @@
 FROM debian:buster
 
-LABEL maintainer "Tim Rühsen <tim.ruehsen@gmx.de>"
+LABEL maintainer="Tim Rühsen <tim.ruehsen@gmx.de>"
 
 WORKDIR /usr/local
 
@@ -63,8 +63,9 @@ RUN cd libunistring && \
 	./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --enable-shared --prefix=$INSTALLDIR && \
 	make -j$(nproc) && make install
 
-RUN git clone https://gitlab.com/libidn/libidn2.git
-RUN cd libidn2 && \
+#RUN git clone https://gitlab.com/libidn/libidn2.git
+RUN wget https://gitlab.com/libidn/libidn2/-/archive/v2.3.2/libidn2-v2.3.2.tar.gz && tar -xf libidn2-v2.3.2.tar.gz
+RUN cd libidn2-v2.3.2 && \
 	./bootstrap && \
 	./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --enable-shared --disable-doc --disable-gcc-warnings --prefix=$INSTALLDIR && \
 	make -j$(nproc) && make install
@@ -87,7 +88,7 @@ RUN cd gnutls && \
 
 RUN git clone --depth=1 https://github.com/dlfcn-win32/dlfcn-win32.git
 RUN cd dlfcn-win32 && \
-	./configure --prefix=$PREFIX --cc=$PREFIX-gcc && \
+	./configure --prefix=$PREFIX --cc=${PREFIX}-gcc && \
 	make && \
 	cp -p libdl.a $INSTALLDIR/lib/ && \
 	cp -p src/dlfcn.h $INSTALLDIR/include/
