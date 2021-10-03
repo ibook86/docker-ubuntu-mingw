@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:buster
 
 LABEL maintainer="Tim Rühsen <tim.ruehsen@gmx.de>"
 
