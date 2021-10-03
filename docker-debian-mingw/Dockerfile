@@ -63,10 +63,8 @@ RUN cd libunistring && \
 	./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --enable-shared --prefix=$INSTALLDIR && \
 	make -j$(nproc) && make install
 
-#RUN git clone https://gitlab.com/libidn/libidn2.git
-#RUN wget https://gitlab.com/libidn/libidn2/-/archive/v2.3.2/libidn2-v2.3.2.tar.gz && tar -xf libidn2-v2.3.2.tar.gz
-RUN wget https://ftp.gnu.org/gnu/libidn/libidn2-2.3.1.tar.gz && tar -xf libidn2-2.3.1.tar.gz
-RUN cd libidn2-2.3.1 && \
+RUN git clone https://gitlab.com/libidn/libidn2.git
+RUN cd libidn2 && \
 	./bootstrap && \
 	./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --enable-shared --disable-doc --disable-gcc-warnings --prefix=$INSTALLDIR && \
 	make -j$(nproc) && make install
