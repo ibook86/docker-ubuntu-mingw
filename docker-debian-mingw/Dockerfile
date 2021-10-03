@@ -37,7 +37,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 	python3 \
 	binfmt-support
 
-
 ENV PREFIX="x86_64-w64-mingw32"
 ENV INSTALLDIR="/usr/local/$PREFIX"
 ENV PKG_CONFIG_PATH="$INSTALLDIR/lib/pkgconfig:/usr/$PREFIX/lib/pkgconfig" \
