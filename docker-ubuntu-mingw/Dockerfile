@@ -1,6 +1,9 @@
-FROM debian:buster
+FROM ubuntu:latest
 
-LABEL maintainer="Tim Rühsen <tim.ruehsen@gmx.de>"
+LABEL maintainer="made by ibook86"
+
+ENV TZ="Asia/Shanghai"
+RUN ln -fs /usr/share/zoneinfo/$TZ /etc/localtime
 
 WORKDIR /usr/local
 
@@ -35,8 +38,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 	libhttp-daemon-perl \
 	libio-socket-ssl-perl \
 	python3 \
-	binfmt-support
-
+	binfmt-support \
+    tzdata && dpkg-reconfigure -f noninteractive tzdata
 
 ENV PREFIX="x86_64-w64-mingw32"
 ENV INSTALLDIR="/usr/local/$PREFIX"
@@ -63,10 +66,8 @@ RUN cd libunistring && \
 	./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --enable-shared --prefix=$INSTALLDIR && \
 	make -j$(nproc) && make install
 
-#RUN git clone https://gitlab.com/libidn/libidn2.git
-#RUN wget https://gitlab.com/libidn/libidn2/-/archive/v2.3.2/libidn2-v2.3.2.tar.gz && tar -xf libidn2-v2.3.2.tar.gz
-RUN wget https://ftp.gnu.org/gnu/libidn/libidn2-2.3.1.tar.gz && tar -xf libidn2-2.3.1.tar.gz
-RUN cd libidn2-2.3.1 && \
+RUN git clone https://gitlab.com/libidn/libidn2.git
+RUN cd libidn2 && \
 	./bootstrap && \
 	./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --enable-shared --disable-doc --disable-gcc-warnings --prefix=$INSTALLDIR && \
 	make -j$(nproc) && make install
