@@ -70,11 +70,11 @@ RUN cd libunistring && \
 	./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --enable-shared --prefix=$INSTALLDIR && \
 	make -j$(nproc) && make install
 
-RUN git clone https://gitlab.com/libidn/libidn2.git
-RUN cd libidn2 && \
+RUN https://ftp.gnu.org/gnu/libidn/libidn2-2.3.2.tar.gz && tar -xf libidn2-2.3.2.tar.gz
+RUN cd libidn2-2.3.2 && \
 	./bootstrap && \
 	./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --enable-shared --disable-doc --disable-gcc-warnings --prefix=$INSTALLDIR && \
-	make -j$(nproc) && make install
+	make clean && make -j$(nproc) && make install
 
 RUN git clone https://git.lysator.liu.se/nettle/nettle.git
 RUN cd nettle && \
