@@ -53,7 +53,7 @@ ENV PKG_CONFIG_PATH="$INSTALLDIR/lib/pkgconfig:/usr/$PREFIX/lib/pkgconfig" \
     CPPFLAGS="-I$INSTALLDIR/include" \
     LDFLAGS="-L$INSTALLDIR/lib" \
     CFLAGS="-O2 -Wall -Wno-format" \
-    WINEPATH="/usr/bin;$INSTALLDIR/bin;$INSTALLDIR/lib;/usr/$PREFIX/bin;/usr/$PREFIX/lib"
+    WINEPATH="$INSTALLDIR/bin;$INSTALLDIR/lib;/usr/$PREFIX/bin;/usr/$PREFIX/lib"
 
 RUN git clone --recursive https://gitlab.com/gnuwget/gnulib-mirror.git gnulib
 ENV GNULIB_SRCDIR /usr/local/gnulib
@@ -70,9 +70,14 @@ RUN cd libunistring && \
 	./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --enable-shared --prefix=$INSTALLDIR && \
 	make -j$(nproc) && make install
 
+#RUN wget https://ftp.gnu.org/gnu/libidn/libidn2-2.3.2.tar.gz && tar -xf libidn2-2.3.2.tar.gz
+#RUN cd libidn2-2.3.2 && \
+#	./bootstrap && \
+#	./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --enable-shared --disable-doc --disable-gcc-warnings --prefix=$INSTALLDIR && \
+#	make clean && make -j$(nproc) && make install
+
 RUN wget https://ftp.gnu.org/gnu/libidn/libidn2-2.3.2.tar.gz && tar -xf libidn2-2.3.2.tar.gz
 RUN cd libidn2-2.3.2 && \
-	./bootstrap && \
 	./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --enable-shared --disable-doc --disable-gcc-warnings --prefix=$INSTALLDIR && \
 	make clean && make -j$(nproc) && make install
 
