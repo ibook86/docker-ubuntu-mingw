@@ -28,5 +28,5 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: false
-          file: ./Dockerfile
+          file: docker-ubuntu-mingw/Dockerfile
           tags: ibook163/docker-ubuntu-mingw:latest
