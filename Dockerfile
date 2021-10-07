@@ -17,7 +17,11 @@ RUN apt-get update -qq && apt-get install --no-install-recommends -y -qq \
 	libtool \
 	make \
 	python \
-	wine wine32 wine64 binfmt-support wine-binfmt \
+	wine \
+    wine32 \
+    wine64 \
+    binfmt-support \
+    wine-binfmt \
 	wine-development \
 	flex \
 	bison \
