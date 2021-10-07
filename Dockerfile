@@ -40,7 +40,7 @@ RUN apt-get update -qq && apt-get install --no-install-recommends -y -qq \
 	python3 \
 	tree \
     tzdata && apt-get -qq autoremove --purge && apt-get -qq clean && \
-    dpkg-reconfigure -f noninteractive tzdata \
+    dpkg-reconfigure -f noninteractive tzdata
 
 RUN update-binfmts --enable wine
 
