@@ -18,7 +18,6 @@ RUN apt-get update -qq && apt-get install --no-install-recommends -y -qq \
 	make \
 	python \
 	wine \
-    wine32 \
     wine64 \
     binfmt-support \
     wine-binfmt \
