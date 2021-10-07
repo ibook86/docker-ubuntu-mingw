@@ -41,7 +41,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 	binfmt-support \
         wine-binfmt \
 	winetricks \
-        tzdata && dpkg-reconfigure -f noninteractive tzdata && update-binfmts --import /usr/share/binfmts/wine
+	tree \
+        tzdata && dpkg-reconfigure -f noninteractive tzdata && update-binfmts --import /usr/share/binfmts/wine && cd /usr/bin && tree
 
 ENV PREFIX="x86_64-w64-mingw32"
 ENV INSTALLDIR="/usr/local/$PREFIX"
