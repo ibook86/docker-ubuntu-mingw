@@ -106,7 +106,7 @@ RUN cd dlfcn-win32 && \
 	cp -p libdl.a $INSTALLDIR/lib/ && \
 	cp -p src/dlfcn.h $INSTALLDIR/include/
 
-RUN git clone --recursive https://gnunet.org/git/libmicrohttpd.git
+RUN git clone --recursive https://git.gnunet.org/libmicrohttpd.git
 RUN cd libmicrohttpd && git checkout `git tag|tail -1` && \
 	./bootstrap && \
 	./configure --build=x86_64-pc-linux-gnu \
