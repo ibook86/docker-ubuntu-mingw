@@ -1,5 +1,5 @@
 # https://github.com/marketplace/actions/build-and-push-docker-images
-name: ci
+name: Docker Hub CI
 
 on:
   push:

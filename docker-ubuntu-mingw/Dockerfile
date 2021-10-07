@@ -1,9 +1,6 @@
-FROM ubuntu:latest
+FROM debian:buster
 
-LABEL maintainer="made by ibook86"
-
-ENV TZ="Asia/Shanghai"
-RUN ln -fs /usr/share/zoneinfo/$TZ /etc/localtime
+LABEL maintainer "Tim Rühsen <tim.ruehsen@gmx.de>"
 
 WORKDIR /usr/local
 
@@ -38,8 +35,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 	libhttp-daemon-perl \
 	libio-socket-ssl-perl \
 	python3 \
-	binfmt-support \
-    tzdata && dpkg-reconfigure -f noninteractive tzdata
+	binfmt-support
+
 
 ENV PREFIX="x86_64-w64-mingw32"
 ENV INSTALLDIR="/usr/local/$PREFIX"
@@ -90,7 +87,7 @@ RUN cd gnutls && \
 
 RUN git clone --depth=1 https://github.com/dlfcn-win32/dlfcn-win32.git
 RUN cd dlfcn-win32 && \
-	./configure --prefix=$PREFIX --cc=${PREFIX}-gcc && \
+	./configure --prefix=$PREFIX --cc=$PREFIX-gcc && \
 	make && \
 	cp -p libdl.a $INSTALLDIR/lib/ && \
 	cp -p src/dlfcn.h $INSTALLDIR/include/
