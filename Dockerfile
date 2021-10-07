@@ -63,13 +63,13 @@ ENV GNULIB_TOOL /usr/local/gnulib/gnulib-tool
 
 RUN wget https://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.15.tar.gz && tar xf libiconv-1.15.tar.gz
 RUN cd libiconv-1.15 && \
-	./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --enable-shared --prefix=$INSTALLDIR && \
+	./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --disable-shared --prefix=$INSTALLDIR && \
 	make -j$(nproc) && make install
 
 RUN git clone https://git.savannah.gnu.org/git/libunistring.git
 RUN cd libunistring && \
 	./autogen.sh && \
-	./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --enable-shared --prefix=$INSTALLDIR && \
+	./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --disable-shared --prefix=$INSTALLDIR && \
 	make -j$(nproc) && make install
 
 #RUN wget https://ftp.gnu.org/gnu/libidn/libidn2-2.3.2.tar.gz && tar -xf libidn2-2.3.2.tar.gz
@@ -80,20 +80,20 @@ RUN cd libunistring && \
 
 RUN wget https://ftp.gnu.org/gnu/libidn/libidn2-2.3.2.tar.gz && tar -xf libidn2-2.3.2.tar.gz
 RUN cd libidn2-2.3.2 && \
-	./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --enable-shared --disable-doc --disable-gcc-warnings --prefix=$INSTALLDIR && \
+	./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --disable-shared --disable-doc --disable-gcc-warnings --prefix=$INSTALLDIR && \
 	make clean && make -j$(nproc) && make install
 
 RUN git clone https://git.lysator.liu.se/nettle/nettle.git
 RUN cd nettle && \
 	bash .bootstrap && \
-	./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --enable-mini-gmp --enable-shared --disable-documentation --prefix=$INSTALLDIR && \
+	./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --enable-mini-gmp --disable-shared --disable-documentation --prefix=$INSTALLDIR && \
 	make -j$(nproc) && make install
 
 RUN git clone --depth=1 https://gitlab.com/gnutls/gnutls.git
 RUN cd gnutls && \
 	SKIP_PO=1 ./bootstrap && \
 	./configure --build=x86_64-pc-linux-gnu --host=$PREFIX \
-		--with-nettle-mini --enable-gcc-warnings --enable-shared --disable-static --with-included-libtasn1 \
+		--with-nettle-mini --enable-gcc-warnings --disable-shared --enable-static --with-included-libtasn1 \
 		--with-included-unistring --without-p11-kit --disable-doc --disable-tests --disable-tools --disable-cxx \
 		--disable-maintainer-mode --disable-libdane --prefix=$INSTALLDIR --disable-hardware-acceleration \
 		--disable-full-test-suite && \
@@ -114,5 +114,5 @@ RUN cd libmicrohttpd && git checkout `git tag|tail -1` && \
 		--prefix=$INSTALLDIR \
 		--disable-doc \
 		--disable-examples \
-		--enable-shared && \
+		--disable-shared && \
 	make -j$(nproc) && make install
