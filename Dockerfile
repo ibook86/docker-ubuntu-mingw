@@ -53,7 +53,7 @@ ENV PKG_CONFIG_PATH="$INSTALLDIR/lib/pkgconfig:/usr/$PREFIX/lib/pkgconfig" \
     CPPFLAGS="-I$INSTALLDIR/include" \
     LDFLAGS="-L$INSTALLDIR/lib" \
     CFLAGS="-O2 -Wall -Wno-format" \
-    WINEPATH="$INSTALLDIR/bin;$INSTALLDIR/lib;/usr/$PREFIX/bin;/usr/$PREFIX/lib"
+    WINEPATH="/usr/bin;$INSTALLDIR/bin;$INSTALLDIR/lib;/usr/$PREFIX/bin;/usr/$PREFIX/lib"
 
 RUN git clone --recursive https://gitlab.com/gnuwget/gnulib-mirror.git gnulib
 ENV GNULIB_SRCDIR /usr/local/gnulib
